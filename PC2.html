@@ -1,0 +1,21 @@
+<html>
+  <body>
+    <div id="app">
+      {{counter}}
+     </div>
+  </body>
+</html>
+
+<script>
+  new Vue({
+  el: '#app',
+  data() {
+    counter: 0
+  },
+  beforeMount() {
+    setInterval(() => {
+      this.counter++
+    }, 1000)
+  }
+  })
+</script>
