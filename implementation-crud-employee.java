@@ -1,4 +1,4 @@
-@GetMapping(params = { "page", "size" })
+    @GetMapping(params = { "page", "size" })
     @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DOCTOR') or hasRole('ROLE_EMPLOYEE')")
     public List<EmployeeResponse> getEmployees(@RequestParam("page") int page, @RequestParam("size") int size) {
         List<EmployeeResponse> employeeResponses = new ArrayList<>();
@@ -13,16 +13,6 @@
         Employee employee = employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Employee", "id", id));
         return getEmployeeResponse(employee);
-    }
-
-    @GetMapping(params = { "idUser" })
-    @PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DOCTOR') or hasRole('ROLE_EMPLOYEE')")
-    public List<EmployeeResponse> getEmployeeByIdUser(@RequestParam("idUser") long idUser) {
-        User user = userRepository.findById(idUser)
-                .orElseThrow(() -> new ResourceNotFoundException("User", "id", idUser));
-        Employee employee = employeeRepository.findByUser(user)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee", "id", user.getId()));
-        return Arrays.asList(getEmployeeResponse(employee));
     }
 
     @PostMapping()
